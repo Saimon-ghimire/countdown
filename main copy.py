@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 import pytz
 import json
 
-print("\nFamily Guy\n"+"*"*50)
+print("\nMoon Knight\n"+"*"*50)
 
 #with ssl verification:
 def soup_recipe(url): #return soup
@@ -43,7 +43,7 @@ def formatTimeStamp(oldTimeStamp):
      return(NPT_timestamp_formatted)
 
 
-url="https://yourcountdown.to/family-guy"
+url="https://yourcountdown.to/moon-knight"
 soup=soup_recipe(url)
 
 #write in file
@@ -66,8 +66,8 @@ NPT_timestamp_formatted=formatTimeStamp(NPT_timestamp)
 
 div = soup.find("h2", {"class": "subtitle"})
 keywords=(div.contents[0]).split()
-infoURL="https://www.rottentomatoes.com/tv/family_guy/s"+keywords[1]+"/e"+keywords[3]
-prevEpInfoURL="https://www.rottentomatoes.com/tv/family_guy/s"+keywords[1]+"/e"+str(int(keywords[3])-1)
+infoURL="https://www.rottentomatoes.com/tv/moon_knight/s0"+keywords[1]+"/e"+keywords[3]
+prevEpInfoURL="https://www.rottentomatoes.com/tv/moon_knight/s0"+keywords[1]+"/e"+str(int(keywords[3])-1)
 def info(infoURL,rank):
     soup= soup_recipe(infoURL)
     div = soup.find("script", {"type": "application/ld+json"})
@@ -80,6 +80,9 @@ def info(infoURL,rank):
         name='Not confirmed'
         description=dict['description']
 
+    # data= str(div).split('","')
+    # name=data[2][7:]
+    # description=data[3][14:]
     if (rank=="Previous "):
         printPart(rank,name,description)
     else:
@@ -97,6 +100,7 @@ def printPart(*args):
         else:
             # currentTime=f"{datetime.datetime.now():%Y %B %d || %H:%M:%S}"
             print("\n{} episode:\nTitle: {}\nTime: {}  (Current time:: {})\n{}".format(args[0],args[1],args[2],now.strftime('%Y %B %d || %H:%M:%S'),args[4]))
+
         
     except:
         #PREVIOUS
