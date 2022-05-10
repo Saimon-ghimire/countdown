@@ -7,26 +7,7 @@ from datetime import datetime, timezone
 import pytz
 import json
 
-values = { 
-    'YS': {'name': 'Young Sheldon','cUrl':'young-sheldon','info_Header':'young_sheldon/s0'},
-    'moonKnight': {'name': 'Moon Knight','cUrl':'moon-knight','info_Header':'moon_knight/s0'},
-    'familyGuy': {'name': 'Family Guy','cUrl':'family-guy','info_Header':'family_guy/s'}
-}
-
-show=int(input("FG-1  MK-2  YS-3: "))
-if (show==1):
-    show='familyGuy'
-elif (show==2):
-    show="moonKnight"
-else:
-    show="YS"
-
-name=values[show]['name']
-cUrl=values[show]['cUrl']
-info_Header=values[show]['info_Header']
-
-
-print("\n{}\n".format(name)+"*"*50)  #name
+print("\n{}\n".format('Family Guy')+"*"*50)  #name
 
 
 #with ssl verification:
@@ -63,7 +44,7 @@ def formatTimeStamp(oldTimeStamp):
      return(NPT_timestamp_formatted)
 
 
-url="https://yourcountdown.to/"+cUrl  #cURL
+url="https://yourcountdown.to/family-guy"
 soup=soup_recipe(url)
 
 #write in file
@@ -86,8 +67,8 @@ NPT_timestamp_formatted=formatTimeStamp(NPT_timestamp)
 
 div = soup.find("h2", {"class": "subtitle"})
 keywords=(div.contents[0]).split()
-infoURL="https://www.rottentomatoes.com/tv/"+info_Header+keywords[1]+"/e"+keywords[3]
-prevEpInfoURL="https://www.rottentomatoes.com/tv/"+info_Header+keywords[1]+"/e"+str(int(keywords[3])-1)
+infoURL="https://www.rottentomatoes.com/tv/family_guy/s"+keywords[1]+"/e"+keywords[3]
+prevEpInfoURL="https://www.rottentomatoes.com/tv/family_guy/s"+keywords[1]+"/e"+str(int(keywords[3])-1)
 def info(infoURL,rank):
     soup= soup_recipe(infoURL)
     div = soup.find("script", {"type": "application/ld+json"})
@@ -128,21 +109,3 @@ info(prevEpInfoURL,'Previous ')
 info(infoURL,'Latest ')
 
 #this is the change done
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
